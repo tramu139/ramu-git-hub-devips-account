@@ -1,0 +1,174 @@
+Syntx of adhoc commands
+$ ansible  all/group_name/ipaddress -i  path_of_inventory_file -m modulename  -a  'arguments'
+
++++++++++++++++++
+Ansible command module to check the  memory info on all managed nodes
+$ ansible all -i /etc/ansible/hosts -m command -a 'free'
+
+++++++++++++++++++
+To open the default inventory file
+
+$ sudo vim  /etc/ansible/hosts
+
+( Observation:  3 ip address are available )
+
++++++++++++++++++
+Now, I copy the first two IP address (  in a  new notepad file )
+quit the inventory file
+
++++++++++++++
+
+Create my own inventory file
+$ vim  myinventory
+go to insert mode
+
+paste two ip address
+save and quit
+
++++++++++++
+To check the inventory file
+
+$ cat myinventory
+
++++++++++++
+$ ansible all -i myinventory -m command -a 'free'
+
+Observation:  free command works on only two machines
+
++++++++++++++
+If you do not mention the inventory file, it takes default inventory file.
+ex:
+$ ansible all  -m command -a 'free'
+
++++++++++++++++++++++++++++++++
+command module is the default module in ansible
+
+$ ansible all  -a 'free'
+
+++++++++++++++++++++++
+
+Note:
+The defualt inventory file is /etc/ansible/hosts  and when using this inventory file, we need not use -i option.
+ex:
+$ ansible all  -m command -a 'free'
+
+++++++++++++++++
+Install git in all managed nodes
+--------------------------------
+$ ansible all -m apt  -a 'name=git  state=present' -b
+ ( b stands for  become , for higher privileges on managed nodes )
+
+Observation: 
+We get "changed": false
+( That means git is already installed on it. The command has no effect in the nodes)
+
+Now , run the below command
+
+$ ansible all -m apt  -a 'name=git  state=absent' -b
+( absent  means - uninstall )
+
+output, we get in yellow color 
+( scroll up )  we get  "changed":true
+( The command is effected the instance )
+
+
+Now if we run the below command  ( with present option )
+$ ansible all -m apt  -a 'name=git  state=present' -b
+
+we get  "changed":true	
+
+Notes:
+apt module  -- This is used for package management.
+1)  ansible all -m apt  -a 'name=git  state=present' -b
+
+
+state=present  is for installation
+state=latest    for upgradation
+state=absent    for uninstallation
+
+++++++++++++++++++++++++++++++++++++++++++
+I wan to update apt-repositoty and install tomcat8
+
+ansible all -m  apt -a 'name=tomcat8 state=present  update_cache=yes' -b
+ 
+The above command will update apt repository and install tomcat8
+To update apt-repository on managed nodes  update_cache=yes  is used 
+
++++++++++++++++++++++++++
+
+File module
+--------------
+This is used to create files and folder on managed nodes
+
+ansible all  -m  file -a  'name=/tmp/file1  state=touch' 
+
+state=touch   is to create files
+state=directory  is to create directory
+state=absent  is for deleting file/directory
+
+To check the file which is create
+$ ssh 172.31.11.96
+$ cd  /tmp
+$ ls
+$ exit
+
+TO create a directory
+ansible all  -m  file -a  'name=/tmp/dir1  state=directory' 
+
+To check the directory
+$ ssh 172.31.11.96
+$ cd  /tmp
+$ ls
+$ exit
+
+To delete the  file
+ansible all  -m  file -a  'name=/tmp/file1  state=absent' 
+
+++++++++++++++++++++++++
+
+Copy Module
+---------------
+This is used for copying the files from controller into managed nodes.
+
+We know in the file  /etc/passwd  we have all the information about users
+
+Now I want to copy the file  into all nodes
+
+$ ansible all -m  copy  -a 'src=/etc/passwd dest=/tmp'
+
+To check the file which is copies
+
+$ ssh 172.31.11.96
+$ cd /tmp
+$ ls
+$ exit
+
+++++++++++++++
+
+Scenario:
+I want to create tomcat users file in controller and copy the file in all the nodes
+
+$ sudo vim tomcat-users.xml
+
+Go to Insert mode
+
+
+<tomcat-users>
+   <user  username="training"  password="freefree"  roles="manager-script"/>
+<tomcat-users>
+
+:wq
+
+$  ansible all -m  copy  -a  'src=tomcat-users.xml  dest=/etc/tomcat8'  -b
+
+To check the file
+--------------------
+
+$ ssh 172.31.11.96
+$ cd /etc/tomcat8
+$ ls
+Open that file to check the contents
+
+$  sudo  cat  tomcat-users.xml
+
+++++++++++++++++++++++

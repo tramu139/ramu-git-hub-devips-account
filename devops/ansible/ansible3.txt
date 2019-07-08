@@ -1,0 +1,177 @@
+Play books
+---------------
+Notes:
+Adhoc commands are capable of working only on one module and one set of arguments.
+When we want to perform complex configuration management activities, 
+adhoc commands will be difficult to manage.
+
+In such scenarios, we use play books.
+Play book is combination of plays.
+Each play is designed to do some activity on the managed nodes.
+These plays are created to work on single host or a group of hosts or all the hosts.
+
+The main advantage of play books  is reusability.
+Play books are created using  yaml files.
+
+
+$ mkdir  playbooks
+$ cd playbooks
+$ vim playbook1.yml
+INSERT   mode
+
+---
+- name: Install git and clone a remote repository
+  hosts: all
+  tasks:
+    - name: Install git
+      apt:
+       name: git
+       state: present
+       update_cache: yes
+    - name: clone remote git repository
+      git:
+        repo: https://github.com/sunilkumark11/git-9am-batch.git
+        dest: /home/ubuntu/newgit  	
+...
+
+To check the syntax:
+$ ansible-playbook  playbook1.yml  --syntax-check
+
+( Do not use tab  when creating yml file )
+
+To run the playbook
+$ ansible-playbook  playbook1.yml  -b
+
++++++++++++++++++++++++++++++
+Notes:
+Ansible playbook for install git and clone the remote repository
+
+---
+- name: Install git and clone a remote repository
+  hosts: all
+  tasks:
+    - name: Install git
+      apt:
+       name: git
+       state: present
+       update_cache: yes
+    - name: clone remote git repository
+      git:
+        repo: https://github.com/sunilkumark11/git-9am-batch.git
+        dest: /home/ubuntu/newgit  	
+...
+
+2nd example on playbook
+---------------------------
+Create user on all managed nodes and I want to copy passwd file.
+
+$ vim playbook2.yml
+
+---
+- name: Create user and copy passwd file
+  hosts: all
+  tasks:
+          - name: User creation
+            user:
+             name: kiran
+             password: freefree
+             uid: 6789
+             home: /home/kiran
+          - name: Copy password into users home dir
+            copy:
+             src: /etc/passwd
+             dest: /home/kiran
+...
+
+Save and quit
+$
+
+Check the syntax:
+$ ansible-playbook  playbook2.yml  --syntax-check
+
+To run 
+$ ansible-playbook  playbook2.yml  -b
+ 
+TO check user is created in managed nodes:
+$ ssh  172.31.11.96 
+$ vim /etc/passwd
+
+To check  if passwd file is copied to  /home/kiran
+$  cd /home/kiran
+$ ls
+$ exit
+
+
+Notes:
+Playbook for creating user and coping the configuration files into users home directory.
+$ vim playbook2.yml
+
+---
+- name: Create user and copy passwd file
+  hosts: all
+  tasks:
+          - name: User creation
+            user:
+             name: kiran
+             password: freefree
+             uid: 6789
+             home: /home/kiran
+          - name: Copy password into users home dir
+            copy:
+             src: /etc/passwd
+             dest: /home/kiran
+...
+
+Save and quit
+$
+
+Command to check the playbook syntax:
+$ ansible-playbook  playbook2.yml  --syntax-check
+
+Command to execute the playbook
+$ ansible-playbook  playbook2.yml  -b
+
+
+Ex 2: Playbook to configure tomcat8   ( earlier  example )
+
+1st uninstall tomcat
+$ ansible  all  -m  apt -a 'name=tomcat8 state=absent  purge=yes'  -b
+
+$ vim playbook3.yml
+
+---
+- name: Configure  tomcat8
+  hosts: all
+  tasks:
+   - name: Install tomcat8
+     apt:
+      name: tomcat8
+      state: present
+   - name: copy tomcat-users.xml file
+     copy:
+      src:  /home/ubuntu/tomcat-users.xml
+      dest: /etc/tomcat8
+   - name: change port of tomcat from 8080 to 9090
+     replace:
+      regexp: 8080
+      replace: 9090
+      path: /etc/tomcat8/server.xml
+   - name: restart tomcat8
+     service:
+      name: tomcat8
+      state: restarted
+   - name: check url response of server 1
+     uri:
+      url: http://172.31.6.207:9090
+      status: 200
+   - name:   check url response of server 2
+     uri:
+      url: http://172.31.12.138:9090
+      status: 200
+...
+
+
+$ ansible-playbook  playbook3.yml  --syntax-check
+$ ansible-playbook  playbook3.yml  -b
+
+
