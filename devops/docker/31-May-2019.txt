@@ -1,0 +1,88 @@
+Docker is a containerization tool.
+A
+V
+
+Virtualization -- Fixed hardware allocation.
+
+Layer
+
+Tomcat, Jenkins
+Docker Engine -- Linux Kernal
+OS
+H/W
+
+++++++++++++++++++
+How many VM?
+How many containers  - 8 GB
+
+++++++++++++++++
+Time to install OS  ?
+
+++++++++
+In Jenkins    Dev, QA , Prod we have  -- 1 sessions
+Using Docker  -- Dev + QA + Prod - sec
+++++++++++++
+
+No Fixed Hardware
+
+Process isolation ( Dependency in os 	 is removed )
++++++++++++++++++++
+Backup   of installed applications?
+
++++++++++++++++++++++++++
+
+CE
+EE
+
++++++++++++++++
+Installing docker on windows
+--------------------------------
+
+Google -- docker download
+
+ Terminal - Windows powershell
+
+VM ware will not work
+
++++++++++++++++++++++++++++
+
+Installing docker on linux
+--------------------------------
+1) Create AWS  --- Connect using git bash
+
+
+Open website --  get.docker.com
+
+sudo su  -
+# curl -fsSL https://get.docker.com -o get-docker.sh
+#   sh get-docker.sh
+
+To check 
+# docker --version
+
+++++++++++++++++++++
+
+In comparison to the traditional virtualization functionalities of hypervisors, Docker containers eliminate the need for a separate guest operating system for every new virtual machine.
+
+Docker implements a high-level API to provide lightweight containers that run processes in isolation. 
+
+A Docker container enables rapid deployment with minimum run-time requirements. It also ensures better management and simplified portability. This helps developers and system admins in rapid deployment of an application.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+Jenkins is a self contained, open source automation server which can be used to automate all  tasks related to building , testing and delivery activities.
+
+
+Jenkins can be installed even on standalone be any machine with a java runtime envirowment (JRE) Installed.
+
+Jenkins is a tool for Implmenting CI-CD (Continuous Integration - Continuous Delivery)
+
+Stages in CI-CD
+
+Stage 1 : Continuous Download
+Stage 2: Continuous Build
+Stage 3: Continuous Deployment
+Stage 4: Continuous Testing
+Stage 5: Continuous Delivery
+
+
+First Four Stages are called Continuous Integration and the fifth stage is called Continuous Delivery.
+
+Steps to install Jenkins on windows
+
+1) Download JDK 1.8 Or Above.
+
+2) Install JDK File.
+
+3) Download Jenkins (Long Term Support) For Windows
+
+4) Install Jenkins
+
+
+We have 5 stages in jenkins & all the stages are known as job in jenkins. Any activity you ask to do in jenkins is known as job.
+
+

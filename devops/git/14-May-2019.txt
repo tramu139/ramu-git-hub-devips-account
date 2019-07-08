@@ -1,0 +1,154 @@
+$ mkdir cpick
+$ cd cpick
+$ git init
+$ touch f1
+$ git add .
+$ git commit -m  "a"
+
+$ touch f2
+$ git add .
+$ git commit -m  "b"
+
+$ git checkout -b test
+$ touch f3
+$ git add .
+$ git commit -m  "c"
+
+$ touch f4
+$ git add .
+$ git commit -m  "d"
+
+
+$ touch f5
+$ git add .
+$ git commit -m  "e"
+$ git log --oneline
+
+I want only c commit and e commit add to master branch
+
+
+$ git checkout  master
+$ git log  --oneline           (  we get 2 commits)
+$ git  cherry-pick   f29604a    efcb77a     ( commit id's)
+
+
+$  git  log  --oneline   ( we get  4 commits)
+
+
+
+
+Notes:
+This feature is used when we want to selectively pickup only few commits 
+from a branch and add them to the master branch.
+
+
+++++++++++++++++++++
+Git stash
+-----------
+
+$git  status     ( working directory is clean )
+
+
+$ touch  f7  f8
+$  git  add .
+$ git  status   
+$ touch   f9   f10
+$ git  status    (  two  staged   files,   two  untracked files)
+$ git  stash
+$  git   status  (  two  untracked file,   two  staged files are stashed )
+$ git add .
+$  git  status (  two staged files )
+$   git commit  -m  "g"
+
+
+To see the list of stashes
+$ git stash list
+
+To get  back the stashed files
+$  git  stash  pop
+
+$ git status  (  two  staged files )
+
++++++++++++++++++++=
+
+Understanding git  stash  -u        ( contd.... )
+$ git  stash   
+$ git  status             ---  clean
+$  touch  f11   f12
+$ git add  .
+$ touch   f13    f14
+$  git   status  (  two  untracked , two  staged )
+$  git  stash  -u  
+$  git  status                    --- clean
+$  git  stash  list
+
+Note:  latest stash is 0
+$  git  stash  pop     (  always get the latest stash  out )
+
+To get the older  stash  out
+$ git  stash  pop  stash@{1}
+$ git  status
+
+
+
+Now,
+
+$ git  stash  list
+
+++++++++++++++++++++++++
+Notes:
+This feature is used for leaving unfinished work, in such a way that Git cannot access it and continue  work on some other files.
+
+Furthur commands of git should be able to process only  the new files.
+This can be done using git stash.
+
+Commands
+--------------------
+1) To stash  the stagged files
+ $  git  stash
+
+2) To stash  staged and untracked files
+$  git  stash  -u
+
+3) To see the list of stashes
+    git  stash  list
+
+4) TO get back the stashed files
+   git  stash pop
+
+5) to bring the older stash  out
+  git  stash  pop  stash@{stash_number}
+
+
+
+++++++++++++++++++++++++++++++++++++++++
+Ammend
+
+$ touch  f15
+$ git  add .
+$ git commit  -m  "i"
+$  cat  > f15
+sadfadsfsd
+sadfsdafdas
+ctrl +d
+$ git status
+$ git add .
+$ git commit  --amend  -m "i"
+
+
+Notes: Help you to insert the data into current commit.
+This is used, when we want to make some modifications  in the same commit.
+
++++++++++++++++++++++++++++++++
+
+
+
+
+
+  
+
+
+
+
+
+

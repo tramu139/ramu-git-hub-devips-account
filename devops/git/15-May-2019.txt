@@ -1,0 +1,143 @@
+Rearrange the commit  order
+------------------------------------
+
+git  rebase    --  command is used to arrange the commit order
+
+
+$ mkdir  demo
+$ git  init
+$ touch f1
+$ git  add .
+$ git commit  -m "a"
+$ touch f2
+$ git  add .
+$ git commit  -m "b"
+$ touch f3
+$ git  add .
+$ git commit  -m "c"
+$ touch f4
+$ git  add .
+$ git commit  -m "d"
+$ touch f5
+$ git  add .
+$ git commit  -m "e"
+$  git log --oneline    (  a b c d e )
+
+Latest commit is the working version of the code.
+I want to change the head pointer.
+Note: It is not possible to rearrange the order of 1st commit.
+
+
+
+$ git rebase  -i  HEAD~2
+
+$  git log --oneline    (  a b c  e d )
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+What is vulnerability
+What is maven global server?
+What is Maven local repository.
+
+
+
+
+What is Maven?
+  It is product of apache.
+All the open source communities  like  Jenkins, tomcat, mysql etc upload their updated API's into maven global server.
+
+We connect to  the maven global server, download those API  that are necessary for the project development and store them in  Maven local repository.
+
+
+
+
+
+
+
+All  developers connect their projects  to this maven local repository and perform the development activity.
+
+
+
+
+
+In this way, the code is stored separately in github. and API's required for code development are stored in maven local repository.
+
+
+This will help in protecting the code from any threats/viruses that might be present in the open source API's.
+
+
+
+
+
+Maven  is also a build tool. Where it can compile the programs and create a artifact.
+
+
+
+
++++++++++++++++++++++++++++++
+Configure Maven
+
+
+
+In google  --  jdk 1.8 download
+Download  and Install
+
+Where jdk is installed?
+
+
+C:\Program Files\Java\jdk1.8.0_211
+
+Copy the path of jdk
+
+
+This PC --> properties -- Advanced system settings --> advanced tab---> Environment variables --> system variables -- new
+
+
+
+Variable name - JAVA_HOME
+Variable value - C:\Program Files\Java\jdk1.8.0_211
+Ok 
+
+
++++++++++++++++
+Now, go to "path" variable --- Edit  -- click on new button
+C:\Program Files\Java\jdk1.8.0_211\bin
+
+Ok  
+
+
+
+++++++++++++
+
+
+
+
+
+
+Download apache  Maven
+In files section
+download  bin.zip  version  and extrack
+
+++++++++++++++++++
+Again, create new environment variable
+
+Variable name - M2_HOME
+Variable value - C:\Users\SUNIL\Downloads\apache-maven-3.6.1-bin\apache-maven-3.6.1
+Ok 
+
+Now, go to "path" variable --- Edit  -- click on new button
+C:\Users\SUNIL\Downloads\apache-maven-3.6.1-bin\apache-maven-3.6.1\bin
+
+Ok  --> Ok
+
+
+
+How to check maven is configured or not?
+Open command prompt
+>  mvn  --version
+
+++++++++++++++
+

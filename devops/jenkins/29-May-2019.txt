@@ -1,0 +1,50 @@
+Interactive input for delivery stage
+----------------------------------------
+Sample Step - input: wait for interactive input
+
+Message: Waiting for approval from delivery team.
+
+Generate script
+Copy the code and paste in stage
+
+Apply -- save -- run
+ 
+Create an account for delivery manager
+Manage jenkins --- manager users -- create user ( ravi )
+
+When ravi logs in, he cannot see the jobs.
+We need to give permissions
+Manage jenkins --- configure global security -- Logged in users can do anything.
+
+apply --save 
+
+++++++++++++++++++
+Login with admin
+select the job -- pipeline -- Syntax generator
+
+Sample Step - input: wait for interactive input
+
+Message: Waiting for approval from delivery team.
+Advanced
+Allowed Submitter -ravi
+Generate script
+
+
+++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

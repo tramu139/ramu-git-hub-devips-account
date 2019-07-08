@@ -1,0 +1,169 @@
+docker volume containers
+-------------------------------
+These are also known as reusable volume.
+The volume used by one container can be shared with other containers.
+Even if all the containres are deleted, data will still be available on the docker host.
+
+Ex:
+
+# sudo su -
+
+Lets create a directory      /data
+# mkdir  /data 
+
+Lets Start  centos as container 
+#  docker run --name  c1  -it  -v /data centos 
+# ls  ( we can see the list of files and dir in centos )
+
+# cd data
+# ls  ( currently we have no files )
+
+Lets create  some files
+# touch file1  file2  ( These two files are available in c1 container)
+
+Comeout of the container without exit
+# Ctrl +p  Ctrl +q  ( container will still runs in background )
+
+
+Lets Start another  centos as container ( c2 container should use the same volume as c1)
+#  docker run --name  c2  -it  --volumes-from c1  centos 
+
+# cd data
+# ls  ( we can see the files created by c1 )
+
+Lets create some more files
+# touch file3  file4
+# ls  ( we see 4 files )
+
+Comeout of the container without exit
+# Ctrl +p  Ctrl +q  ( container will still runs in background )
+
+Lets Start another  centos as container
+#  docker run --name  c3  -it  --volumes-from c2 centos 
+# cd data
+# ls  ( we can see 4 files )
+# touch file5  file6
+# ls
+
+Comeout of the container without exit
+# Ctrl +p  Ctrl +q  ( container will still runs in background )
+
+Now, lets connect to any container which is running in the background
+# docker attach  c1
+#  ls  ( you can see all the files )
+# exit
+
+Identify the mount location
+$ docker inspect  c1
+( search for the mount section )
+
+Take a note of the source path
+
+/var/lib/docker/volumes/397c2f12eb36c74200799728ed1fdf256390cb5b430b38ea35c99104d96e26a4/_data
+
+Lets remove all the container
+# docker rm -f  c1  c2  c3
+
+Lets go to the source path
+
+# cd /var/lib/docker/volumes/5a87dd31b7b3061dde083246a388c1cb5e9a6dc6a806062fd9e97080f83ec91e/_data
+
+# ls  ( we can see all the files )
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Creating customized docker images
+----------------------------------------
+
+
+Whenever docker container is deleted, all the softwares that we have installed within the container will also be deleted.
+
+If we can save the container as an image, then we can preserve the softwares.
+This creation of customized docker images can be done in two ways.
+
+1) using docker commit command
+2) using docker file
+
+
+Using docker commit
+----------------------
+
+# docker run  --name c1 -it  ubuntu
+Update apt repository
+
+# apt-get update
+# apt-get install git
+ 
+# git --version
+# exit
+
+Lets delete the container
+# docker rm -f  c1
+
+Now create a new ubuntu container
+# docker run  --name c1 -it  ubuntu
+
+DO you have git installed in it  ?
+# git  --version
+
+Now again i will update  apt repository
+# apt-get update
+# apt-get install git
+
+TO check the git
+# git  --version
+# exit
+
+TO save the container as image (snapshot )
+# docker commit   c1   myubuntu
+
+To see the list of images
+# docker images  ( you can see the image which you have created )
+
+++++++++++++++++++++++
+Now lets run the image which we have created
+# docker run --name c2 -it   myubuntu
+
+
+# git --version  ( git is pre installed )
+
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+Using docker file
+--------------------
+This is a simple text file, which uses  predefinied keywords for creating customized docker images.
+
+Key words used in docker file  ( case sensitive )
+
+1) FROM  --  used to specify the base image from which the docker file has to be created.
+
+2) MAINTAINER -- This represents name of the organization or the
+ author who created this docker file.
+
+3) CMD   -- This is used to specify the initial command that should be executed when the container 	starts.
+
+4) ENTRYPOINT - used to specify the default process that should be executed when container starts.
+It can also be used for accepting arguments from the CMD instruction.
+
+5) RUN  -- Used for running linux commands within the container. It is generally helpful for installing the software in the container.
+
+6) USER  --      used to specify the default user who should login into the container.
+
+7) WORKDIR --  
+    Used to specify default working directory in the container
+
+8) COPY  --  Copying the files from the host machine to the container.
+
+9) ADD  -- Used for copying files  from host to container, it can also be used for downloading files from remote servers.
+
+10) ENV  --  used for specifying the environment variables that should be passed to the container.
+
+EXPOSE -- Used to specify the internal port of the container
+VOLUME  --  used to specify the default volume that should be attached to the container.
+LABEL  --  used for giving label to the container
+STOPSIGNAL  -- Used to specify the key sequences that have to be passed in order to stop the container.
+
+
+

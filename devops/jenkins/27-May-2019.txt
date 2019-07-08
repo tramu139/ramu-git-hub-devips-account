@@ -1,0 +1,98 @@
+Build pipeline plugin
+	This is a plugin, which is used for getting a better graphical user interface for controlling jobs.
+
+
+++++++++++++++++
+PIPELINE as code
+---------------------
+This is set of plugins  which are used for implementing CI-CD  from the level of code.
+This code is created using groovy script, and this file is also called as jenkins file.
+
+
+Advantges
+-----------------
+As pipeline is implemented as code, it gives the developers the ability to upload into vesion controlling system from where they can edit and review the script.
+
+
+
+Pipelines can accept interactive human input before continuning with specific stage in CI-CD
+
+
+Ex: Before deployment into production environment, pipeline script can accept  approval
+from the delivery head and then continue.
+
+
+
+
+Pipeline script support complex realtime scenario where we can implement conditional statements, loops etc.
+
+Ex: If testing passes, we want to go to delivery.
+     If its fails, we want to send automated emails.
+
+
+Pipeline can be implemented in two ways
+1) Scripted pipeline
+2) Declarative pipeline
+
+
+Scripted pipeline syntax:
+------------------------------------
+node ( 'master/slave')
+{
+         stage(' Stage in CI-CD')
+           {
+                   Groovy  code for implementing the stage
+           }
+}
+
+
+Declarative pipeline
+pipeline
+{
+     agent  any
+     stages
+        {
+	stage ('Stage in CI-CD')
+                    {
+                          steps
+                              {
+                                    Groovy  code for implementing the stage
+                               }
+                     }
+           }
+}
+
+++++++++++++++++++
+Ex:
+
+Create new item ---  ScriptedPipeline
+select pipeline  --OK
+Pipeline tab,
+
+pipeline syntax
+
+Sample step - node: Allocate node
+ label - master
+
+Generate piplescript  -- copy the groovy code and paste in pipeline tab.
+
+-------------
+In pipeline syntax 
+
+Sample step - stage:Stage
+Stage name - Continuous Download
+Generate piplescript  -- copy the groovy code and paste in pipeline tab.
+
+-----
+
+In pipeline syntax 
+
+Sample step - git:Git
+Repository URL - https://github.com/sunildevops77/maven.git
+Generate piplescript  -- copy the groovy code and paste in pipeline tab.
+
+-------------
+
+Apply  --- Save --> Run the job
+
+

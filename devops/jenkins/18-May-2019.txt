@@ -1,0 +1,64 @@
+Create Sample Job
+
+
+
+Click on execute windows batch command
+In Command Box Enter echo " Hello Jenkins"
+Click on Console Output
+
++++++++++++++++++++++++++++++
+
+For Continuous Download we need to download the Git on windows
+
+1) Download the GIT for windows
+
+2) Install the GIT
+
+3) Go to the path of the GIT in your local machine where you have install GIT in program file. Note down the path of the GIT.exe file.
+
+C:\Program Files\Git\bin\git.exe
+
+4) Go to jenkins Dashboard
+
+5) Click on manage jenkins ( Like a control panel)
+
+6) Click on Global Tool Configuration
+
+7) Go to GIT
+
+8) Enter Any name
+
+9) Enter the path of the GIT File ( C:\Program Files\Git\bin\git.exe )
+
+Download the Code automatically we need to create a new Job
+
+1) Create New Job in Jenkins
+
+2) Enter Item Name as Developement & Select Freestyle project 
+
+3) Select Source Code management tab.
+
+Source code management is your verison control system.
+
+4) Select GIT
+
+5) Create the GITHUB Account
+
+6) Get Some Java Code path from the github website 
+(https://github.com/github/maven-plugins.git)
+
+In real time you get the url from the developer team.
+
+7) Press Apply & Save
+
+8) Back to Dashboard
+
+9) Click on the build icon on the right side of the job
+
+10) Click on the number
+
+11) You will get the path of your system where all the files are download.
+
+This is called Continuous Download.
+
+

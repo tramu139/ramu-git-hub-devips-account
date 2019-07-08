@@ -1,0 +1,295 @@
++++++++++++++++++++++++++++++
+Configure Maven
+
+
+
+In google  --  jdk 1.8 download
+Download  and Install
+
+Where jdk is installed?
+
+
+C:\Program Files\Java\jdk1.8.0_211
+
+Copy the path of jdk
+
+
+This PC --> properties -- Advanced system settings --> advanced tab---> Environment variables --> system variables -- new
+
+
+
+Variable name - JAVA_HOME
+Variable value - C:\Program Files\Java\jdk1.8.0_211
+Ok 
+
+
++++++++++++++++
+Now, go to "path" variable --- Edit  -- click on new button
+C:\Program Files\Java\jdk1.8.0_211\bin
+
+Ok  
+
+
+
+++++++++++++
+
+
+
+
+Download apache  Maven
+In files section
+download  bin.zip  version  and extrack
+
+++++++++++++++++++
+
+
+
+
+Again, create new environment variable
+
+Variable name - M2_HOME
+Variable value - C:\Users\SUNIL\Downloads\apache-maven-3.6.1-bin\apache-maven-3.6.1
+Ok 
+
+
+
+
+
+Now, go to "path" variable --- Edit  -- click on new button
+C:\Users\SUNIL\Downloads\apache-maven-3.6.1-bin\apache-maven-3.6.1\bin
+
+Ok  --> Ok
+
+
+
+
+
+
+How to check maven is configured or not?
+Open command prompt
+>  mvn  --version
+
+
+
+
+++++++++++++++
+
+
+
++++++++++++
+What is an artifact?
+What is maven number?
+What is groupid   ( is noting but project structure )
+
+
+Steps to create a maven project
+
+Command to create maven project
+> mvn archetype:generate
+
+
+
+
+
+
+Choose a number or apply filter:  
+
+Note: Type of the project is dependent on the above number
+1324  --  For default java project
+1728  --  For empty web application
+1366  --  For sample maven project
+
+Lets select the default number: 1366  ( just hit enter )
+
+
+
+
+
+
+
+Now, we need to choose the version
+Lets take the default one 8
+
+
+
+Now, Define value for group id
+
+
+What is groupid
+When programmer  is creating some code, they follow a project structure
+Conventions for project  structure
+For commercial application -- main folder starts with com  Ex:  com.<project_name>
+For government application -- main folder starts with gov  Ex:  gov.<project_name>
+For organization application -- main folder starts with org  Ex:  org.<project_name>
+
+
+
+Define the value for groupID: com.durga
+
+What is  Artifactid: webappdurga      ( With this name artifcat will be created )
+
+We get  BUILD SUCCESS message
+
+
+
+
+
+
+In which location project is created?
+In that location, we find src folder and pom.xml file
+
+
+src contains two folders.
+main and test
+
+Code created by the developer will be in main folder.
+Code created by the developer for unit testing will be in test folder.
+
+
+POM  --  stands for project  Object model. It is an xml file, which will store all the external API information.
+
+
+
+++++++++++++++++++++++++
+
+In git,
+We have 3 components
+1) working directory  --  Developer will place the files. In this case "webappdurga" is our working directory.
+2) staging area
+3) local repository
+
+
+
+Now, developer will make the webappsdurga as master branch
+
+Open gitbash
+change directory to webappsdurga
+$ git init
+$ git status
+$ git add .
+$ git commit -m "first commit"
+
++++++++++++++++++++++
+Notes:
+Creating Maven project
+Step 1: Open command prompt
+Step 2: run the command >  mvn archetype:generate
+	--  choose the number / apply filter  ( This is the type of java project that should be created)  --Hit enter
+	-- Choose a number: 8   -- Hit enter
+                -- Define value for groupid  --  com.durga  ( This will create the project structure )
+               -- Define value for artifactid -- webappdurga      ( With this name artifcat will be created )
+              -- Define value for version --  ( take default )  
+              -- Define value for package-  ( take default )
+                -- Confirm the above details by enterting Y
+	-- Check for BUILD SUCCESS message
+
+
+Maven project is created.
+Maven project contains  src folder and POM.xml file.
+
+src contains two folders.
+main and test
+
+Code created by the developer will be in main folder.
+Code created by the developer for unit testing will be in test folder.
+
+POM  stands for Project Object Model.
+It is an xml file, which stores information about  3rd party API's required by the developer.
+
+Observation:  POM.xml files have dependencies tag.
+Under it we have dependency  tag
+
+Under dependencies tag, we need to provide 3rd party API information.
+
+3rd Party API details are present in search.maven.org
+
+Developer will search for the required API  here 
+Ex: 
+1) search for mysql  ( select the required API )  - select version
+copy the dependency tag and paste in pom.xml
+
+2) search for cobertura
+copy the dependency tag and paste in pom.xml
+
+
+
+Now, we need to download the API from Maven Global server to Maven local repository.
+ Open command prompt  >  change directory to maven project
+ >  cd  webappdurga
+ > mvn compile
+
+
+Where is maven local repository present?
+Maven local repository is created with the name  .m2
+
++++++++++++
+Open git bash
+Go to working directory
+$ git status
+$ git add .
+$ git commit -m "second commit"
+
+++++++++++++++
+Notes:  Adding 3rd party API to pom.xml file.
+
++++++++++++++++++++
+Observe the folder structure created in the maven project ( webappdurga )
+We can find the folder structure as mentioned in "groupid"
+
+They have given sample java Project.
+Copy code in App.java, lets create a new  java file, save as Sample.java  ( change class name also) 
+
+
+code
+---------
+package com.durga;
+
+/**
+ * Hello world!
+ *
+ */
+public class Sample
+{
+    public static void main( String[] args )
+    {
+        System.out.println( "Hello Durgasoft" );
+    }
+}
+
++++++++++++++++++++
+
+Now, we need to compile the java files  
+In command prompt
+> mvn compile
+
+Observation:
+A new folder target is created in webappdurga, we can see the class files.
+
++++++++++++++++++
+Similarly
+goto src/test/java/com/durga
+create  another java file with the name SampleTest.java
+
+Add one line of code at the end  ( for our reference )
+System.out.println("Testing Passed");
+
++++++++++++++++
+Now, we need to convert the unit testing code into .class file, for that we have command 
+
+> mvn test
+
+++++++++++++++++
+Observation:
+In folder target , test-classes will be created , which contains .class files
+
++++++++++++++++++
+To create Artifact
+
+> mvn  package
+
+Where is the location of the artifact?
+
+
+
+++++++++++++++
+

@@ -1,0 +1,148 @@
+What is gitbash ?
+
+How to configure username and email for git
+
+$ git config --global   user.name "sunilkumark11"
+$ git config --global   user.email  "sunilkumark11@gmail.com"
+
+ TO check the configurations
+$ git config  --global  --list
+
+working directory ------> staging area -------> LR
+
+untracked files
+staged files
+commited files
+
++++++++++++++
+
+How to make working directory as git repository
+
+$ git init
+
+-Observation -
+
+++++++++++++++++
+
+$  git status
+
++++++++++++++++++
+To move file to staging area
+
+$ git  add  f1
+
+$  git  add   f2  f3
+
+$ git  add  .
+
+
+++++++++++++++++
+Bring file back to untracked section
+
+$ git rm  --cached f1
+
+or
+
+$ git reset  f2 
+
+++++++++++++++++++++
+To move the files from staging are to LR
+
+$ git  commit  -m  "first commit"
+
+$ git status
+
++++++++++++++++++++
+To see the list of commit
+
+$ git log
+
++++++++++++++++++++
+remaining files I want to move to LR
+
+$ git  add .
+$ git commit -m  "second commit"
+
+$ git log
+(or)
+git log --oneline
+
+
+$  git status
+
+++++++++++++++++++
+Notes
+1) Setting username and email
+
+2) As per git , there are three comopnents
+working directory  --  untracked files
+staging area  -- staged files
+LR  -- commited files
+
+3) commands
+To initilize working directory as git repo
+To move files to staging are
+To bring back files from staging to untracked sectiion
+To move files from staging to LR
+To check the status of untracked files and staged files
+To see the commit history
+
+
+
+.gitignore
+-----------------
+It is special configuration file.
+The filenames mentioned in this files will be ignored by git commands.
+
+Ex:
+$ touch  file1 file2   file3   file4  file5
+
+$ cat > .gitignore
+file1
+file2
+file3
+file4
+
+ctrl+d
+
+
+$ git status
+$ git add .
+$ git commit -m  "third commit"
+
+$ git status
+its clean
+
+
+
+
+
+
+
+
+
+
+
+( vim  .gitignore)
+
+
+
+
+
++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

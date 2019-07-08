@@ -1,0 +1,47 @@
+ps
+ps -aux
+free
+df -h
+how can you switch to root user?
+
+
+passwd root  ( error)
+
+*sudo
+
++++++++++++++++++
+tree d1 
+
+To install packages
+
+apt-get install packagename
+
+
+Step 1: Update apt  repository 
+sudo apt-get update
+Step 2: Install the package
+ sudo apt-get install tree
+
+To remove the package
+sudo apt-get remove tree
+
+++++++++++++++++++
+VCS  -- 
+older and later versions
+Developers can download
+Developers can switch to any version
+
+Two types
+1) Centrailized Version controlling  --  only one respository  
+2) Distributed Version controlling  -- local repository is available. vc at developer level.
+				LR  will be uploaded into RR. VC at team level.
+				RR is github
+				
+
++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+

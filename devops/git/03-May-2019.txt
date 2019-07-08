@@ -1,0 +1,35 @@
+Creating infrastructure uing AWS
+=====================================
+1 Open https://portal.aws.amazon.com/billing/signup
+  Signup for a free acoount
+
+2 Login using that account
+
+2 Click on EC2-->Click on Instances
+
+3 Click on Launch Instance-->Select Red hat Linux
+
+4 click on review and launch-->click on launch
+
+5 in select an exisiting keypair window-->click on create a new keypair
+
+6 specify some name for keypair-->download keypair
+
+7 Launch instance
+
+8 Once the instances are running-->downlaod and install git bash
+   https://git-scm.com/downloads
+
+15 Open git bash
+	change the directory to downloads
+
+16 go to aws console-->Select the instance that we want to connect-->click on connect
+
+17 It will display the ssh command to connect to aws console
+
+18 copy that command and give in git bash, to connect to linux machine.
+
+
+
+
+

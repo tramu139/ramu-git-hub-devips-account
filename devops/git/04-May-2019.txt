@@ -1,0 +1,23 @@
+1) Create a  file
+2) Overwrite the file
+3) Add contents to the file
+4) Remove the file
+5) touch command
+6) Create a directiry
+7) Delete Directory
+8) Go to previous directory
+9) How to create 4 directories   (  d1 ---> d2 ------> d3 ------> d4 )
+10) Linux file structure
+11) rmdir fails  vs rm -r
+12) long list 
+13) what if file name starts with .
+14) How to see the hidden files
+14) how to create hidden directory
+15) combination of options 
+16) How to see manual of a command
+17) How to get the files according to timestamp    -lt            ,  ltr
+18) How to copy a file
+19) How to copy a file into directory
+20) How to copy directory  ( r )
+21) How to copy file with preserve option
+

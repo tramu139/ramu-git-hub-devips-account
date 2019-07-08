@@ -1,0 +1,161 @@
+Branching
+Every functionality will have a branch
+
+1) How to see the list of branches
+$ git branch
+
+2) How to create new branch
+$ git branch  test
+Observation:  commit history  will carry forward.
+
+3) Move the control to new branch
+
+$ git checkout  test    (  Observation -  * )
+$  git log --oneline  ( we get  commit history )
+
+Now, create file on test branch
+$ touch  file100
+$  git  status
+$  git  add .
+
+Move to master branch
+$  git checkout  master
+$ git  commit -m  "fourth commit"
+$  ls    ( Do we get the file  )  -
+
+Can we see the file in test branch
+
+$ git checkout  test
+$ ls
+
++++++++++++++++++++
+Create new file from test branch
+$ touch  file101
+$ git status
+$ git add .
+$ git commit  -m  "fifth commit"
+$ ls  (  Do we get the file )  - Y
+Does this file will be available in master?
+$ git checkout master
+$ ls
+Can we see the file101  -- No
+
+++++++++++++++++++++++
+Notes:
+Why this feature?  (  Create code for diffrent functionality on separate  branches )
+Default branch - master
+
+Commands
+---------------
+1) To see list of all branches
+2) To create new branch
+3) To move to a new branch
+4) To create a new branch and also  move to it
+$ git checkout  -b    branch_name
+
+5) To merge  branch with  master.  ( First move to master and then merge )
+$ git checkout master
+$ git merge   branch_name
+
+6) To delete  a branch
+$ git  branch -d  branch_name  ( soft delete )
+$ git  branch -D  branch_name  ( hard delete )
+
+Soft delete -- Deleting a branch  after  the branch is merged with master
+Hard delete -  Deleting branch that is not merged with master.
+
++++++++++++++++++++++++
+
+New scenario  from the scratch
+
+$ mkdir   branches
+$  cd  branches
+$ git  status     (  error )
+$  git  init
+$  touch  f1
+$ git add  .
+$ git commit  -m  "a"
+$ touch f2
+$ git  add  .
+$ git commit  -m  "b"
+$ git  log   ( we get 2 commit )
+
+$ git checkout -b  test      
+$  git  log    ( how many commit  we get ? )
+ create new files in  test branch
+
+$ touch  t1
+$ git  add .
+$  git  commit  -m "c"
+$ touch t2
+$ git   add .
+$  git  commit  -m "d"
+$ git log  --oneline       (  we get 4 commit  -- a b c d )
+
+$ git checkout master
+$ git log  --oneline  ( we get  2 commit -- a  b )
+
+create new file in master
+$ touch  f3
+$ git  add .
+$ git  commit  -m "e"
+
+$ touch f4
+$ git add .
+$ git  commit  -m "f"
+$ git log  --oneline    (  we get  a  b  e   f )
+
+We merge the branch
+$ git merge  test
+
+$ git  log  --oneline  
+
+( when merge is done new commit is created ) 
+
+
+++++++++++++++++
+How can we move the files from LR  to RR
+
+RR --  github
+
+Signup  and login to github
+create new repository
+
+How to link LR to RR
+
+( Look for push  an existing repository from commands line )
+git remote add origin https://github.com/sunildevops77/rep1.git
+
+To push the files
+git push -u origin master
+
+Check the RR
+
+
+Notes:
+Create new branch -- Commit history is carry forwarded.
+1) signup for git  --> Create RR --  
+
+checkin -- The process of uploading from LR to RR
+
+
+Checkout  -- Download from RR to LR
+
++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

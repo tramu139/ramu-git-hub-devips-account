@@ -1,0 +1,224 @@
+Terms
+-----------------
+1) Docker Image --  Is collection of binaries and libraries, necessary for one application.
+All these docker images are present in  the cloud site of docker   hub.docker.com
+			
+2) Docker Container - Running instance of an image is called is as container.
+Any no of containers can be created using one image.
+3) Docker Host -- windows machine / linux machine on which docker is intalled, is called Docker 											host.
+4) Docker Client --  This is an application, which accepts the docker commands and passes these commands to a background process called docker demon. On linux machine the terminal will work like docker client. On windows machine, powershell will work like docker client.
+
+5) Docker demon  --  This is a backgroud process which is responsible for accepting the docker commands from the docker client and depending on the kind of command, it passes the request to images / containers / docker registry.  Registry is a location where all the docker images are stored. This registry is of two types.	i) Public  registry   ii) Private registry
+
+
+i) public registry is hub.docker.com  and it is maintained by the docker community.
+ii) private registry is created on our local servers and it can be accessed only by our organization team members.
+
+
+-------------------------------------------
+  
+Connect to git bash
+-------------------
+$ sudo su -
+
+TO install docker run below two commands
+
+#    curl -fsSL https://get.docker.com -o get-docker.sh
+#    sh get-docker.sh
+
+( we can get the above two commands from ( https://get.docker.com/ )
+
+
+# docker images   ( There are no images )
+
+To download tomcat image
+
+# docker pull tomcat
+# docker images		
+
+# docker pull ubuntu
+
+If you do not specify the version, by default, we get latest version
+
+I want to download jenkins
+# docker pull jenkins
+
+
+TO create a container from an image
+# docker run --name   mytomcat  -p 7070:8080 tomcat
+
+TO check the tomcat is running or not
+http://13.250.47.90:7070
+
+( 7070 is port number mapped in docker host)
+
+Lets remove the container  ( Open another gitbash terminal)
+
+# docker stop  mytomcat
+# docker rm -f mytomcat
+
+# docker run --name   mytomcat  -p 7070:8080 -d tomcat
+( The above command  runs tomcat in detached mode , so we get out # prompt back )
+ 
+# docker container ls
+
+TO start jenkins
+#  docker run --name myjenkins  -p 9090:8080 -d jenkins
+
+To check for jenkins ( Open browser )
+ http://13.250.47.90:9090
+
+To create ubuntu container
+#  docker run --name myubuntu  -it ubuntu
+
+Observation:  You have automatically entered into ubuntu
+# ls  ( To see the list of files in ubuntu )
+# exit  ( To comeout of container back to host )
+
+++++++++++++++
+I need postgres database
+# docker pull postgres
+
+
+To see the list of images
+# docker images
+
++++++++++++++
+Scenario 1:
+Start tomcat as a container and name it as "webserver". Perform port mapping and run this container in detached mode
+
+# docker run --name  webserver  -p 7070:8080  -d tomcat
+
+To access homepage of the tomcat container
+Launch any browser
+public_ip_of_dockerhost:7070
+
+++++++++++++++++++++++++++++++++
+
+Scenario 2:
+Start jenkins as a container in detached mode , name is as "devserver", perform port mapping
+
+# docker run -d  --name  devserver  -p 9090:8080 jenkins
+
+To access home page of jenkins ( In browser)
+public_ip_of_dockerhost:9090
+
+++++++++++++++++++++++++++++++++++++++++
+
+Scenario 3:  Start nginx as a container and name as "appserver", run this in detached mode ,   perform automatic port mapping 
+
+Generally we pull the image and run the image
+
+Instead of pulling, i directly   
+
+# docker run --name  appserver  -P  -d  nginx 
+
+( if image is not available, it perform pull operation automatically )
+( Capital P  , will perform automatic port mapping )
+
+How to check nginx is running or not? ( we do not know the port number)
+
+To know the port that is reserved for nginx )
+# docker port  appserver
+80/tcp -> 0.0.0.0:32768
+
+80  is nginx port
+32768  is  dockerhost port
+
+or
+
+#  docker container ls    ( to see the port of nginz and docker host )
+
+To check nginx on browser
+52.221.192.237:32768
+
+++++++++++++++++++++++++++
+To start centos as container
+
+# docker run --name mycentos  -it  centos
+#  exit  ( To come back to dockerhost )
+
+++++++++++++++
+To start mysql  as container, open interactive terminal in it, create a sample table.
+
+# docker run  --name  mydb  -d  -e MYSQL_ROOT_PASSWORD=durgasoft  mysql:5
+
+# docker container ls
+
+I want to open bash terminal of  mysql
+# docker  exec   -it  mydb  bash
+
+To connect to mysql database
+#  mysql  -u  root  -p 
+
+enter the password, we get mysql  prompt
+
+TO see list of databases
+> show databases;
+
+TO switch to a databse
+> use db_name
+> use mysql
+
+TO create emp tables and dept tables
+
+https://justinsomnia.org/2009/04/the-emp-and-dept-tables-for-mysql/
+
+
+> exit
+# exit
+# exit
+
+
+++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
